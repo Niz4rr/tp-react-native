@@ -1,0 +1,29 @@
+# Node
+node_modules/
+
+# Expo
+.expo/
+.expo-shared/
+
+# IDEs
+.vscode/
+*.sublime-workspace
+*.sublime-project
+
+# macOS
+.DS_Store
+
+# Logs
+npm-debug.log*
+
+# Android/Gradle
+android/
+
+# iOS
+ios/
+
+# Local env
+.env
+
+# Optional lockfile
+package-lock.json
