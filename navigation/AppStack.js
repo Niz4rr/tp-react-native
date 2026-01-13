@@ -1,19 +1,23 @@
-import React from 'react';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import TodoListScreen from '../screens/TodoListScreen';
-import TodoDetailsScreen from '../screens/TodoDetailsScreen';
-import TodoListFetchScreen from '../screens/TodoListFetchScreen';
-import TodoListOfflineScreen from '../screens/TodoListOfflineScreen';
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
+import LoginScreen from "../screens/LoginScreen";
+import AppDrawer from "./AppDrawer";
 
 const Stack = createNativeStackNavigator();
-
 export default function AppStack() {
+  const { user, loading } = useContext(AuthContext);
+  if (loading) return null;
   return (
-    <Stack.Navigator>
-      <Stack.Screen name="Liste" component={TodoListScreen} />
-      <Stack.Screen name="Détails" component={TodoDetailsScreen} />
-      <Stack.Screen name="Fetch" component={TodoListFetchScreen} />
-      <Stack.Screen name="Offline" component={TodoListOfflineScreen} />
-    </Stack.Navigator>
+    <NavigationContainer>
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        {!user ? (
+          <Stack.Screen name="Login" component={LoginScreen} />
+        ) : (
+          <Stack.Screen name="App" component={AppDrawer} />
+        )}
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
